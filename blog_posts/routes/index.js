@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
-
+const express = require("express");
+const router = express.Router();
+const axios = require("axios");
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", (req, res, next) => {
+  axios
+    .get("https://api.hatchways.io/assessment/blog/posts?tag=tech")
+    .then((response) => {
+      console.log(response.data);
+      res.json(response.data);
+    });
 });
 
 module.exports = router;
